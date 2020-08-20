@@ -1,15 +1,11 @@
+import sys
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-path = 'C:\\Users\\rabbear\\Desktop\\sky.jpg'
-
-img = cv2.imread(path)
-# plt.hist(img.ravel(),256,[0,256])
-# plt.show()
 
 def calcGrayHist(I):
-    # 计算灰度直方图
+    # Calculate gray histogram
     h, w = I.shape[:2]
     grayHist = np.zeros([256], np.uint64)
     for i in range(h):
@@ -17,19 +13,21 @@ def calcGrayHist(I):
             grayHist[I[i][j]] += 1
     return grayHist
 
+
 def equalHist(img):
-    # 灰度图像矩阵的高、宽
+    # The height and width of the gray image
     h, w = img.shape[0], img.shape[1]
-    # 第一步：计算灰度直方图
+    # Step 1: Calculate the gray histogram
     grayHist = calcGrayHist(img)
-    # 第二步：计算累加灰度直方图
+    # Step 2: Calculate the cumulative gray histogram
     zeroCumuMoment = np.zeros([256], np.uint32)
     for p in range(256):
         if p == 0:
             zeroCumuMoment[p] = grayHist[0]
         else:
             zeroCumuMoment[p] = zeroCumuMoment[p - 1] + grayHist[p]
-    # 第三步：根据累加灰度直方图得到输入灰度级和输出灰度级之间的映射关系
+    # Step 3: Obtain the mapping relationship between the input gray level
+    # and the output gray level according to the accumulated gray histogram
     outPut_q = np.zeros([256], np.uint8)
     cofficient = 256.0 / (h * w)
     for p in range(256):
@@ -38,7 +36,7 @@ def equalHist(img):
             outPut_q[p] = np.floor(q)
         else:
             outPut_q[p] = 0
-    # 第四步：得到直方图均衡化后的图像
+    # Step 4: Obtain the equalized image of the histogram
     equalHistImage = np.zeros(img.shape, np.uint8)
     for i in range(h):
         for j in range(w):
@@ -46,9 +44,20 @@ def equalHist(img):
     return equalHistImage
 
 
-# 使用自己写的函数实现
-equa = equalHist(img)
+def main():
+    img_name = sys.argv[1]
+    img = cv2.cvtColor(cv2.imread(img_name), cv2.COLOR_BGR2RGB)
+    # Use your own function to implement
+    equa = equalHist(img)
 
-#plt.hist(equa.ravel(),256,[0,256])
-plt.imshow(equa)
-plt.show()
+    # plt.hist(equa.ravel(),256,[0,256])
+    plt.imshow(equa)
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
+
+
+# plt.hist(img.ravel(),256,[0,256])
+# plt.show()

@@ -1,14 +1,19 @@
+import sys
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-path = 'C:\\Users\\rabbear\\Desktop\\sky.jpg'
 
-img = cv2.imread(path)
+def main():
+    img_name = sys.argv[1]
+    img = cv2.cvtColor(cv2.imread(img_name), cv2.COLOR_BGR2RGB)
 
-#设置阈值函数为大于200设为255，小于200为0
+    # Set the threshold function to be greater than 200, (or less than 200)
+    img[img < 210] = 0
 
-img[img<210] = 0
+    plt.imshow(img)
+    plt.show()
 
-plt.imshow(img)
-plt.show()
+
+if __name__ == '__main__':
+    main()

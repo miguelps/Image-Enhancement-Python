@@ -1,27 +1,25 @@
-Image Enhancement Using Python
-==================
+# Image Enhancement Using Python
 
-Image Enhancement can be divided to **Two** class, the point processing and the histogram processing.
+Image Enhancement can be divided to __Two__ class, the point processing and the histogram processing.
 
-Point Processing
----------
+## Point Processing
 
 Six methods are used here, they are:
 
-Po
-- Image Negative <br>
-It's the simplest method to transform image using *point processing*
-- Thresholding Transformations <br>
-set a threshold function
-- Logarithmic Transformations <br>
-do the *Log* transformation to the image <br>
-which can widen the image grey level
-- Powers-Law Transformations <br>
-Also be called the famous *Gamma transformation*
-- Piecewise Linear Transformation Functions <br>
-The *enhanced edition* of Thresholding Transformations
+- Image Negative \
+  It's the simplest method to transform image using _point processing_
+- Thresholding Transformations \
+  set a threshold function
+- Logarithmic Transformations \
+  do the _Log_ transformation to the image \
+  which can widen the image grey level
+- Powers-Law Transformations \
+  Also be called the famous _Gamma transformation_
+- Piecewise Linear Transformation Functions \
+  The _enhanced edition_ of Thresholding Transformations
 
-Histogram Processing
----------
-Use histogram to process image.<br>
-The most used method is called **histogram equalization**<br>
+## Histogram Processing
+
+Use histogram to process image.
+
+The most used method is called __histogram equalization__.
